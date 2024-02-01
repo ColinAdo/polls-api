@@ -37,6 +37,7 @@ class TestPoll(APITestCase):
                          'Expected Response Code 200, received {0} instead.'
                          .format(response.status_code))
         
+    # Using client instance
     def test_list2(self):
         response = self.client.get(
             self.url,
@@ -44,4 +45,18 @@ class TestPoll(APITestCase):
             )
         self.assertEqual(response.status_code, 200,
                          'Expected Response Code 200, received {0} instead.'
+                         .format(response.status_code))
+        
+    def test_create(self):
+        param = {
+            "question": "How are you?",
+            "created_by": 1
+        }
+        response = self.client.post(
+            self.url,
+            param,
+            HTTP_AUTHORIZATION=f'Token {self.token.key}'
+        )
+        self.assertEqual(response.status_code, 201,
+                         'Expected Response Code 201, received {0} instead.'
                          .format(response.status_code))
