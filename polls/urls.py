@@ -1,12 +1,14 @@
 from django.urls import path
 from .views import PollViewSet, ChoiceList, CreateVote, UserCreate, LoginView
 from rest_framework.routers import DefaultRouter
+# from rest_framework.authtoken import views other way to create login
 
 router = DefaultRouter()
 router.register('polls', PollViewSet, basename='polls')
 
 urlpatterns = [
     path('login/', LoginView.as_view(), name="login"),
+    # path('login/', views.obtain_auth_token, name="login") other way to create login
 
     path('users/', UserCreate.as_view(), name="user_create"),
 
